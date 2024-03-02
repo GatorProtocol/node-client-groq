@@ -14,6 +14,6 @@ model = Model(
     boost=1,
     env=dict(os.environ),
     errorcallback=sys.exit,
-    checkfreq=3
+    checkfreq=1,
 )
 model.start()

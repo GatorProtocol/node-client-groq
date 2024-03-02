@@ -11,7 +11,11 @@ client = Groq(
 )
 
 def infer(id, prompt, entropy):
-    messages = json.loads(prompt)["messages"]
+    print(prompt)
+    prompt_dict = eval(prompt)
+    print(prompt_dict)
+
+    messages = prompt_dict["messages"]
     
     completion = client.chat.completions.create(
         messages=messages,
@@ -23,3 +27,7 @@ def infer(id, prompt, entropy):
     )
     out = completion.choices[0].message.content
     return out
+
+##prompt = '"\n {\n     \"messages\": [\n         {\n             \"role\": \"user\",\n             \"content\": \"Write an essay about the history, future, and current events of Bitcoin...\"\n         }\n     ]\n }\n "'
+##prompt = json.loads(prompt[1:-1].replace("\n", "").replace("\t", ""))
+##print(prompt["messages"])
