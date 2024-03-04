@@ -26,6 +26,7 @@ def infer(id, prompt, entropy):
         seed=int(entropy),
     )
     out = completion.choices[0].message.content
+    print(out)
     return out
 
 ##prompt = '"\n {\n     \"messages\": [\n         {\n             \"role\": \"user\",\n             \"content\": \"Write an essay about the history, future, and current events of Bitcoin...\"\n         }\n     ]\n }\n "'
