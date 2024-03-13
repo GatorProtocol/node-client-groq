@@ -10,25 +10,37 @@ client = Groq(
     api_key=os.environ["GROQ_API_KEY"]
 )
 
-def infer(id, prompt, entropy):
-    print(prompt)
+def infer(model_id, prompt, entropy):
     prompt_dict = eval(prompt)
-    print(prompt_dict)
-
     messages = prompt_dict["messages"]
     
-    completion = client.chat.completions.create(
-        messages=messages,
-        stop=None,
-        stream=False,
-        temperature=0.5,
-        model="llama2-70b-4096",
-        seed=int(entropy),
-    )
+    if model_id == 12:
+        completion = client.chat.completions.create(
+            messages=messages,
+            stop=None,
+            stream=False,
+            temperature=0.5,
+            model="llama2-70b-4096",
+            seed=int(entropy),
+        )
+    elif model_id == 14:
+        completion = client.chat.completions.create(
+            messages=messages,
+            stop=None,
+            stream=False,
+            temperature=0.5,
+            model="Gemma-7b-it",
+            seed=int(entropy),
+        )
+    elif model_id == 16:
+        completion = client.chat.completions.create(
+            messages=messages,
+            stop=None,
+            stream=False,
+            temperature=0.5,
+            model="mixtral-8x7b-32768",
+            seed=int(entropy),
+        )
+    
     out = completion.choices[0].message.content
-    print(out)
     return out
-
-##prompt = '"\n {\n     \"messages\": [\n         {\n             \"role\": \"user\",\n             \"content\": \"Write an essay about the history, future, and current events of Bitcoin...\"\n         }\n     ]\n }\n "'
-##prompt = json.loads(prompt[1:-1].replace("\n", "").replace("\t", ""))
-##print(prompt["messages"])
