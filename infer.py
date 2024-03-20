@@ -29,7 +29,7 @@ def infer(model_id, prompt, entropy):
             stop=None,
             stream=False,
             temperature=0.5,
-            model="Gemma-7b-it",
+            model="gemma-7b-it",
             seed=int(entropy),
         )
     elif model_id == 16:
